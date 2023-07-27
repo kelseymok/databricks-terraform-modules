@@ -1,0 +1,1 @@
+From: https://registry.terraform.io/providers/databricks/databricks/latest/docs/guides/unity-catalog#create-users-and-groups
