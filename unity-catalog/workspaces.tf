@@ -32,3 +32,7 @@ resource "databricks_metastore_assignment" "default_metastore" {
 data "databricks_mws_workspaces" "all" {
   provider = databricks.mws
 }
+
+output "all_workspace_ids" {
+  value = local.all_workspace_ids
+}
