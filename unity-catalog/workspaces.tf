@@ -17,7 +17,8 @@ resource "databricks_metastore_data_access" "this" {
 }
 
 locals {
-  all_workspace_ids = data.databricks_mws_workspaces.all.ids == null ? {} : data.databricks_mws_workspaces.all.ids
+  all_workspace_ids_generated = data.databricks_mws_workspaces.all.ids == null ? {} : data.databricks_mws_workspaces.all.ids
+  all_workspace_ids = length(var.workspace_ids_override) > 0 ? var.workspace_ids_override : local.all_workspace_ids_generated
 }
 
 resource "databricks_metastore_assignment" "default_metastore" {

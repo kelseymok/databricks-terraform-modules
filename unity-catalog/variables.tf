@@ -11,6 +11,12 @@ variable "region" {
   type = string
 }
 
+
+variable "workspace_ids_override" {
+  type = list(string)
+  default = []
+}
+
 #variable "databricks_workspace_ids" {
 #  description = <<EOT
 #  List of Databricks workspace IDs to be enabled with Unity Catalog.
