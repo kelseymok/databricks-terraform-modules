@@ -16,6 +16,15 @@ resource "databricks_metastore_data_access" "this" {
   is_default = true
 }
 
+resource "databricks_grants" "this" {
+  provider     = databricks.workspace
+  metastore = databricks_metastore.this.id
+  grant {
+    principal  = "account users"
+    privileges = ["CREATE_CATALOG"]
+  }
+}
+
 locals {
   all_workspace_ids_generated = data.databricks_mws_workspaces.all.ids == null ? {} : data.databricks_mws_workspaces.all.ids
   all_workspace_ids =  length(var.workspace_ids_override) > 0 ? var.workspace_ids_override : [for i in values(local.all_workspace_ids_generated) : tostring(i)]

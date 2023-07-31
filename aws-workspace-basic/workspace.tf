@@ -45,3 +45,11 @@ resource "databricks_mws_workspaces" "this" {
   }
 }
 
+resource "databricks_workspace_conf" "this" {
+  custom_config = {
+#    "enableWebTerminal" : true,
+#    "enableGp3" : true,
+    "enableDbfsFileBrowser" : true,
+#    "enableDcs" : true
+  }
+}
