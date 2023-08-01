@@ -39,6 +39,24 @@ resource "databricks_metastore_assignment" "default_metastore" {
   default_catalog_name = "hive_metastore"
 }
 
+resource "databricks_catalog" "sandbox" {
+  metastore_id = databricks_metastore.this.id
+  name         = "sandbox"
+  comment      = "This catalog is managed by Terraform"
+  properties = {
+    purpose = "Training"
+  }
+}
+
+resource "databricks_grants" "sandbox" {
+  catalog = databricks_catalog.sandbox.name
+
+  grant {
+    principal  = "account users"
+    privileges = ["ALL_PRIVILEGES"]
+  }
+}
+
 data "databricks_mws_workspaces" "all" {
   provider = databricks.mws
 }
