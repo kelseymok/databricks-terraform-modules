@@ -40,20 +40,25 @@ resource "databricks_metastore_assignment" "default_metastore" {
 }
 
 resource "databricks_catalog" "sandbox" {
+  provider             = databricks.workspace
   metastore_id = databricks_metastore.this.id
   name         = "sandbox"
   comment      = "This catalog is managed by Terraform"
   properties = {
     purpose = "Training"
   }
+  depends_on = [databricks_metastore_assignment.default_metastore]
 }
 
 resource "databricks_grants" "sandbox" {
+  provider = databricks.workspace
   catalog = databricks_catalog.sandbox.name
 
   grant {
     principal  = "account users"
-    privileges = ["ALL_PRIVILEGES"]
+    privileges = [
+      "ALL_PRIVILEGES",
+    ]
   }
 }
 
