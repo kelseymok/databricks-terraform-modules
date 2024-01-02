@@ -1,7 +1,9 @@
 variable "databricks_client_id" {
+  sensitive = true
 }
 
 variable "databricks_client_secret" {
+  sensitive = true
 }
 
 variable "databricks_workspace_url" {}
