@@ -8,4 +8,5 @@ provider "databricks" {
   host     = "https://accounts.cloud.databricks.com"
   client_id = var.databricks_client_id
   client_secret = var.databricks_client_secret
+  account_id = var.databricks_account_id
 }
