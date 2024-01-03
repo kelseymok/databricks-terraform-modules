@@ -14,6 +14,7 @@ resource "databricks_mws_permission_assignment" "this" {
 
 
 data "databricks_group" "admins" {
+  provider = databricks.workspace
   display_name = "admins"
 }
 
