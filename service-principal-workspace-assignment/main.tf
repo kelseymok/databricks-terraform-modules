@@ -1,4 +1,5 @@
 data "databricks_service_principal" "this" {
+  provider = databricks.mws
   application_id = var.databricks_client_id
 }
 
