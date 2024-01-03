@@ -29,10 +29,8 @@ resource "databricks_permissions" "token_usage" {
     permission_level = "CAN_USE"
   }
 
-  access_control {
-    group_name = data.databricks_group.admins.display_name
-    permission_level = "CAN_MANAGE"
-  }
-
-
+#  access_control {
+#    group_name = data.databricks_group.admins.display_name
+#    permission_level = "CAN_MANAGE"
+#  }
 }
