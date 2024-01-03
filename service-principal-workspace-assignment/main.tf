@@ -17,7 +17,7 @@ resource "databricks_permissions" "token_usage" {
   authorization = "tokens"
 
   access_control {
-    service_principal_name = databricks_service_principal.this.application_id
+    service_principal_name = databricks_service_principal.this.id
     permission_level = "CAN_USE"
   }
 }
