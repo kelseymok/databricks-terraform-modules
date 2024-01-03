@@ -1,21 +1,14 @@
-provider "aws" {
-  region = var.region
-}
-
-// initialize provider in "MWS" mode for account-level resources
-provider "databricks" {
-  alias      = "mws"
-  host       = "https://accounts.cloud.databricks.com"
-  account_id = var.databricks_account_id
-  client_id = var.databricks_client_id
-  client_secret = var.databricks_client_secret
-}
-
-// initialize provider at workspace level, to create UC resources
-provider "databricks" {
-  alias    = "workspace"
-  host     = var.databricks_workspace_url
-  account_id = var.databricks_account_id
-  client_id = var.databricks_client_id
-  client_secret = var.databricks_client_secret
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = ">=1.13.0"
+      configuration_aliases = [aws]
+    }
+    databricks = {
+      source = "databricks/databricks"
+      version = ">=1.33.0"
+      configuration_aliases = [ databricks.mws, databricks.workspace ]
+    }
+  }
 }
