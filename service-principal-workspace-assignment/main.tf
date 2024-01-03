@@ -1,4 +1,4 @@
-resource "databricks_service_principal" "this" {
+data "databricks_service_principal" "this" {
   application_id = var.databricks_client_id
 }
 
@@ -7,7 +7,7 @@ resource "databricks_service_principal" "this" {
 resource "databricks_mws_permission_assignment" "this" {
   provider = databricks.mws
   workspace_id = var.workspace_id
-  principal_id = databricks_service_principal.this.id
+  principal_id = data.databricks_service_principal.this.id
   permissions  = ["ADMIN"]
 }
 
@@ -17,7 +17,7 @@ resource "databricks_permissions" "token_usage" {
   authorization = "tokens"
 
   access_control {
-    service_principal_name = databricks_service_principal.this.application_id
+    service_principal_name = data.databricks_service_principal.this.application_id
     permission_level = "CAN_USE"
   }
 }
