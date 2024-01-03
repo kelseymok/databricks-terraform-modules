@@ -9,3 +9,5 @@ variable "databricks_client_secret" {
 }
 
 variable "databricks_account_id" {}
+
+variable "databricks_workspace_url" {}

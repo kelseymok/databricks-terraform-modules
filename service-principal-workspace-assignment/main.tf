@@ -15,7 +15,7 @@ resource "databricks_mws_permission_assignment" "this" {
 // Allows the Service Principal to use PAT (managing OAuth)
 // https://docs.databricks.com/en/dev-tools/service-principals.html#step-3-assign-workspace-level-permissions-to-the-databricks-service-principal
 resource "databricks_permissions" "token_usage" {
-  provider = databricks.mws
+  provider = databricks.workspace
   authorization = "tokens"
 
   access_control {
