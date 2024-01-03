@@ -12,6 +12,11 @@ resource "databricks_mws_permission_assignment" "this" {
   permissions  = ["ADMIN"]
 }
 
+
+data "databricks_group" "admins" {
+  display_name = "admins"
+}
+
 // Allows the Service Principal to use PAT (managing OAuth)
 // https://docs.databricks.com/en/dev-tools/service-principals.html#step-3-assign-workspace-level-permissions-to-the-databricks-service-principal
 resource "databricks_permissions" "token_usage" {
@@ -22,4 +27,11 @@ resource "databricks_permissions" "token_usage" {
     service_principal_name = data.databricks_service_principal.this.application_id
     permission_level = "CAN_USE"
   }
+
+  access_control {
+    group_name = data.databricks_group.admins.display_name
+    permission_level = "CAN_MANAGE"
+  }
+
+
 }
