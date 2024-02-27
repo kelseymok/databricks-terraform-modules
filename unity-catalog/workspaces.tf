@@ -1,3 +1,10 @@
+// https://registry.terraform.io/providers/databricks/databricks/latest/docs#special-configuration-for-unity-catalog
+// Except for metastore, metastore assignment and storage credential objects, Unity Catalog APIs are accessible
+// via workspace-level APIs. This design may change in the future.
+//
+// NOTE: This is frustrating because it means we need to stand up a workspace before creating the Unity Catalog and
+// then that first workspace is hardcoded into the terraform provider for the workspace. Creates a strange dependency.
+
 resource "databricks_metastore" "this" {
   provider      = databricks.workspace
   name          = "primary"
