@@ -1,9 +1,10 @@
 resource "databricks_group" "this" {
   provider       = databricks.workspace
   display_name               = var.group_name
-  allow_cluster_create       = true
-  allow_instance_pool_create = true
+  allow_cluster_create       = false
+  allow_instance_pool_create = false
   workspace_access           = true
+  databricks_sql_access      = true
 }
 
 #resource "databricks_user" "this" {
