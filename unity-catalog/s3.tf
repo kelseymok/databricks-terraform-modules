@@ -5,11 +5,12 @@ resource "aws_kms_key" "this" {
   policy = data.aws_iam_policy_document.kms.json
 }
 
+# Default policy (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html)
 data "aws_iam_policy_document" "kms" {
   statement {
     actions = ["kms:*"]
     principals {
-      identifiers = ["*"]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
       type        = "AWS"
     }
     resources = ["*"] // TODO: Make less permissive
