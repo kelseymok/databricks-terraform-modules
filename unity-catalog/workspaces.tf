@@ -69,10 +69,21 @@ resource "databricks_grants" "sandbox" {
   }
 }
 
+resource "databricks_catalog" "dbdemos" {
+  provider             = databricks.workspace
+  metastore_id = databricks_metastore.this.id
+  name         = "dbdemos"
+  comment      = "This catalog is managed by Terraform"
+  properties = {
+    purpose = "Training"
+  }
+  depends_on = [databricks_metastore_assignment.default_metastore]
+}
+
 
 resource "databricks_grants" "dbdemos" {
   provider = databricks.workspace
-  catalog = "dbdemos"
+  catalog = databricks_catalog.dbdemos.name
 
   grant {
     principal  = "account users"
