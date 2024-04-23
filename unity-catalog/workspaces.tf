@@ -28,7 +28,7 @@ resource "databricks_grants" "this" {
   metastore = databricks_metastore.this.id
   grant {
     principal  = "account users"
-    privileges = ["CREATE_CATALOG", "USE CATALOG"]
+    privileges = ["CREATE_CATALOG"]
   }
 }
 
