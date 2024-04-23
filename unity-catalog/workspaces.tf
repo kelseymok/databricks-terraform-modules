@@ -69,6 +69,19 @@ resource "databricks_grants" "sandbox" {
   }
 }
 
+
+resource "databricks_grants" "dbdemos" {
+  provider = databricks.workspace
+  catalog = "dbdemos"
+
+  grant {
+    principal  = "account users"
+    privileges = [
+      "ALL_PRIVILEGES",
+    ]
+  }
+}
+
 data "databricks_mws_workspaces" "all" {
   provider = databricks.mws
 }
